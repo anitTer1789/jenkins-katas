@@ -2,12 +2,7 @@ pipeline {
   agent any
   stages {
     stage('Clone'){
-      agent {
-            docker {
-              image 'swarm'
-            }
-
-          }
+      node('swarm'){
       steps{
         stash name: "code", excludes: "./.git/*"
       }
