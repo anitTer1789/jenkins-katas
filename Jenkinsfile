@@ -1,7 +1,22 @@
 pipeline {
   agent any
   stages {
+    stage('Clone'){
+      agent {
+            docker {
+              image 'gradle:swarm'
+            }
+
+          }
+      steps{
+        stash name: "code", excludes: "./.git/*"
+      }
+      
+    }
     stage('Build app') {
+      options{
+        skipDefaultCheckout(true)
+      }
       parallel {
         stage('Build app') {
           agent {
