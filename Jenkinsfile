@@ -6,6 +6,7 @@ pipeline {
         stage('Parallel execution') {
           steps {
             sh 'echo "hello world" '
+            archiveArtifacts 'app/build/libs/'
           }
         }
 
@@ -21,12 +22,6 @@ pipeline {
           }
         }
 
-      }
-    }
-
-    stage('Hi') {
-      steps {
-        archiveArtifacts 'app/build/libs/'
       }
     }
 
