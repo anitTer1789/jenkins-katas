@@ -33,6 +33,7 @@ pipeline {
             docker {
               image 'gradle:6-jdk11'
             }
+          }
 
           steps {
             unstash "code"
