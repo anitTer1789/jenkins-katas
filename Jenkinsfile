@@ -2,12 +2,12 @@ pipeline {
   agent any
   stages {
     stage('Clone'){
-      node('swarm'){
+      agent { label 'swarm' }
       steps{
+        
         stash name: "code", excludes: "./.git/*"
       }
       
-    }
     }
     stage('Build app') {
       options{
