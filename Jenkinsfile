@@ -4,6 +4,7 @@ pipeline {
 
     docker_username     = 'anitatereszczuk'
   }
+  
   stages {
     stage('Clone'){
       agent { label 'swarm' }
@@ -55,16 +56,16 @@ pipeline {
       }
     }
 
-    stage(){
+    stage('push docker'){
       environment {
-      DOCKERCREDS = credentials('docker_login') //use the credentials just created in this stage
+        DOCKERCREDS = credentials('docker_login') //use the credentials just created in this stage
       }
         steps {
           unstash 'code' //unstash the repository code
           sh 'ci/build-docker.sh'
           sh 'echo "$DOCKERCREDS_PSW" | docker login -u "$DOCKERCREDS_USR" --password-stdin' //login to docker hub with the credentials above
           sh 'ci/push-docker.sh'
-}
+        }
     }
 
 
