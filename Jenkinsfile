@@ -4,7 +4,7 @@ pipeline {
     stage('Clone'){
       agent {
             docker {
-              image 'swarm:latest'
+              image 'swarm'
             }
 
           }
