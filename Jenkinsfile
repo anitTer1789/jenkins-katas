@@ -28,13 +28,12 @@ pipeline {
           }
         }
 
-        stage('Say hello') {
-          steps {
-            sh 'echo "Hello world"'
-          }
-        }
-
         stage('Test code'){
+          agent {
+            docker {
+              image 'gradle:6-jdk11'
+            }
+
           steps {
             unstash "code"
             sh 'ci/unit-test-app.sh'
@@ -42,6 +41,11 @@ pipeline {
           }
         }
 
+        stage('Say hello') {
+          steps {
+            sh 'echo "Hello world"'
+          }
+        }
       }
     }
 
