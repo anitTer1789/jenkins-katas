@@ -5,7 +5,7 @@ pipeline {
       agent { label 'swarm' }
       steps{
         
-        stash name: "code", excludes: "./.git/*"
+        stash name: "code", excludes: ".git/*"
       }
       
     }
@@ -34,8 +34,20 @@ pipeline {
           }
         }
 
+        stage('Test code'){
+          unstash "code"
+          sh 'ci/unit-test-app.sh'
+          junit 'app/build/test-results/test/TEST-*.xml'
+        }
+
       }
     }
 
   }
+
+  post {
+    cleanup {
+        deleteDir() /* clean up our workspace */
+    }
+}
 }
