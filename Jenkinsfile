@@ -8,6 +8,7 @@ pipeline {
       }
       
     }
+    }
     stage('Build app') {
       options{
         skipDefaultCheckout(true)
