@@ -1,15 +1,8 @@
 pipeline {
   agent any
   stages {
-    stage('Say Hello') {
+    stage('Build app') {
       parallel {
-        stage('Parallel execution') {
-          steps {
-            sh 'echo "hello world" '
-            archiveArtifacts 'app/build/libs/'
-          }
-        }
-
         stage('Build app') {
           agent {
             docker {
@@ -19,6 +12,13 @@ pipeline {
           }
           steps {
             sh 'ci/build-app.sh'
+            archiveArtifacts 'app/build/libs/'
+          }
+        }
+
+        stage('Say hello') {
+          steps {
+            sh 'echo "Hello world"'
           }
         }
 
