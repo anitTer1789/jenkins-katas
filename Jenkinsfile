@@ -35,9 +35,11 @@ pipeline {
         }
 
         stage('Test code'){
-          unstash "code"
-          sh 'ci/unit-test-app.sh'
-          junit 'app/build/test-results/test/TEST-*.xml'
+          steps {
+            unstash "code"
+            sh 'ci/unit-test-app.sh'
+            junit 'app/build/test-results/test/TEST-*.xml'
+          }
         }
 
       }
