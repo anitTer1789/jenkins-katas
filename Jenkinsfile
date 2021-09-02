@@ -75,7 +75,7 @@ pipeline {
     stage('run component test'){
       when {
         not {
-           branch 'dev/'
+           branch 'dev/*'
        }
    }
       steps{
