@@ -73,9 +73,6 @@ pipeline {
     }
 
     stage('run component test'){
-      when{
-        branch != 'dev/*'
-      }
 
       steps{
         sh 'ci/component-test.sh'
