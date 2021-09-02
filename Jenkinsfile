@@ -3,6 +3,7 @@ pipeline {
   environment {
 
     docker_username     = 'anitatereszczuk'
+  }
   stages {
     stage('Clone'){
       agent { label 'swarm' }
@@ -74,6 +75,5 @@ pipeline {
     cleanup {
         deleteDir() /* clean up our workspace */
     }
-}
 }
 }
