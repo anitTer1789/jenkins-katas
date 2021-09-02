@@ -4,7 +4,7 @@ pipeline {
     stage('Clone'){
       agent {
             docker {
-              image 'gradle:swarm'
+              image 'swarm:latest'
             }
 
           }
@@ -26,6 +26,7 @@ pipeline {
 
           }
           steps {
+            unstash "code"
             sh 'ci/build-app.sh'
             archiveArtifacts 'app/build/libs/'
           }
